@@ -11,6 +11,7 @@ class LanguageController extends Controller
     {
         // fetch data
         $wordData = $this->fetchWordOfTheDay();
+        $quoteData = $this->fetchQuoteOfTheDay();
 
         return view('welcome', compact('wordData', 'quoteData'));
     }
@@ -20,7 +21,18 @@ class LanguageController extends Controller
         $response = Http::withHeaders([
             'x-rapidapi-host' => 'wordsapiv1.p.rapidapi.com',
             'x-rapidapi-key' => env('WORDS_API_KEY')
-        ])->get('https://wordsapiv1.p.rapidapi.com/words/');
+        ])->withoutVerifying()->get('https://wordsapiv1.p.rapidapi.com/words/');
+
+        return $response->json();
+    }
+
+    private function fetchQuoteOfTheDay()
+    {
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'x-rapidapi-host' => 'andruxnet-random-famous-quotes.p.rapidapi.com',
+            'x-rapidapi-key' => env('QUOTES_API_KEY')
+        ])->withoutVerifying()->post('https://andruxnet-random-famous-quotes.p.rapidapi.com/?count=1&cat=movies', []);
 
         return $response->json();
     }

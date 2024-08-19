@@ -11,11 +11,11 @@
         <h1>Daily Language Learning Companion</h1>
         <div id="content">
             <h2>Word of the Day</h2>
-            <p>{{ $wordData['word'] }}</p>
-            <p>Definition: {{ $wordData['results'][0]['definition'] }}</p>
+            <p>{{ $wordData['word'] ?? 'No word available' }}</p>
+            <p>Definition: {{ $wordData['results'][0]['definition'] ?? 'No definition available' }}</p>
 
             <h2>Daily Motivational Quote</h2>
-            <p>"{{ $quoteData['content'] }}" - {{ $quoteData['author'] }}</p>
+            <p>"{{ $quoteData[0]['quote'] ?? 'No quote available' }}" - {{ $quoteData[0]['author'] ?? 'Unknown' }}</p>
         </div>
     </div>
 </body>
