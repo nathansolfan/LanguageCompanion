@@ -21,7 +21,7 @@ class LanguageController extends Controller
         $response = Http::withHeaders([
             'x-rapidapi-host' => 'wordsapiv1.p.rapidapi.com',
             'x-rapidapi-key' => env('WORDS_API_KEY')
-        ])->withoutVerifying()->get('https://wordsapiv1.p.rapidapi.com/words/');
+        ])->get('https://wordsapiv1.p.rapidapi.com/words/');
 
         return $response->json();
     }
@@ -32,7 +32,7 @@ class LanguageController extends Controller
             'Content-Type' => 'application/json',
             'x-rapidapi-host' => 'andruxnet-random-famous-quotes.p.rapidapi.com',
             'x-rapidapi-key' => env('QUOTES_API_KEY')
-        ])->withoutVerifying()->post('https://andruxnet-random-famous-quotes.p.rapidapi.com/?count=1&cat=movies', []);
+        ])->post('https://andruxnet-random-famous-quotes.p.rapidapi.com/?count=1&cat=movies', []);
 
         return $response->json();
     }
