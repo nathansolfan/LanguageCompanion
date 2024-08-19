@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class LanguageController extends Controller
 {
@@ -13,6 +14,11 @@ class LanguageController extends Controller
         $wordData = $this->fetchWordOfTheDay();
         $quoteData = $this->fetchQuoteOfTheDay();
 
+        // Log or dump the data to see what you're getting
+        // Log::info($wordData);
+        // Log::info($quoteData);
+        // dd($wordData, $quoteData);
+
         return view('welcome', compact('wordData', 'quoteData'));
     }
 
@@ -21,9 +27,13 @@ class LanguageController extends Controller
         $response = Http::withHeaders([
             'x-rapidapi-host' => 'wordsapiv1.p.rapidapi.com',
             'x-rapidapi-key' => env('WORDS_API_KEY')
-        ])->get('https://wordsapiv1.p.rapidapi.com/words/');
+        ])->get('https://wordsapiv1.p.rapidapi.com/words/banana');
 
-        return $response->json();
+        if ($response->successful()) {
+            return $response->json();
+        } else {
+            return $response->json(); // for debugging
+        }
     }
 
     private function fetchQuoteOfTheDay()
