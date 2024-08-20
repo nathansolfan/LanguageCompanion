@@ -40,10 +40,18 @@ class LanguageController extends Controller
         $response = Http::withHeaders([
             'x-rapidapi-host' => 'wordsapiv1.p.rapidapi.com',
             'x-rapidapi-key' => env('WORDS_API_KEY')
-        ])->get('https://wordsapiv1.p.rapidapi.com/words/{$word}');
+        ])->get("https://wordsapiv1.p.rapidapi.com/words/{$word}");
 
         if ($response->successful()) {
-            return $response->json();
+            $data = $response->json();
+
+
+            // Check if results exist and extract the definition
+            if (isset($data['results']) && !empty($data['results'])) {
+                return $data;
+            } else {
+                return ['word' => $word, 'results' => [['definition' => 'No definition available']]];
+            }
         } else {
             return ['word' => $word, 'results' => [['definition' => 'No definition available']]];
         }
