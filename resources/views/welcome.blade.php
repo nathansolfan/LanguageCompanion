@@ -9,6 +9,15 @@
 <body>
     <div id="app">
         <h1>Daily Language Learning Companion</h1>
+
+         <!-- Form for user input -->
+         <form action="{{ route('fetchWord') }}" method="POST">
+            @csrf
+            <label for="word">Enter a word:</label>
+            <input type="text" id="word" name="word" required>
+            <button type="submit">Get Word</button>
+        </form>
+
         <div id="content">
             <h2>Word of the Day</h2>
             <p>{{ $wordData['word'] ?? 'No word available' }}</p>
