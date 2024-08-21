@@ -2,9 +2,10 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
+    "dev": "vite",
+    "build": "vite build && move public\\build\\.vite\\manifest.json public\\build\\manifest.json"
+},
+
     "devDependencies": {
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0.5",
