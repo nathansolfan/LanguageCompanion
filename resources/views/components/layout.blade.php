@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="container mx-auto p-6">
         <h1>{{ $header ?? 'Daily Language Learning Companion' }}</h1>
         <div id="content">
             {{ $slot }}
